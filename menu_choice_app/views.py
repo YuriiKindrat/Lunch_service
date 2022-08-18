@@ -24,9 +24,7 @@ class MenuViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         today = d.today()
-        return sorted(Menu.objects.filter(day=today.strftime('%A')),
-                      key=lambda menu: menu.votes_count,
-                      reverse=True)
+        return Menu.objects.filter(day=today.strftime('%A'))
 
     @action(
         methods=["GET"],
