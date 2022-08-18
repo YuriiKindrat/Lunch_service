@@ -6,7 +6,10 @@ from datetime import date as d
 from rest_framework.response import Response
 
 from menu_choice_app.models import Restaurant, Menu, Vote
-from menu_choice_app.serializers import RestaurantSerializer, MenuSerializer, VoteSerializer, UserSerializer
+from menu_choice_app.serializers import (RestaurantSerializer,
+                                         MenuSerializer,
+                                         VoteSerializer,
+                                         UserSerializer)
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
@@ -33,7 +36,8 @@ class MenuViewSet(viewsets.ModelViewSet):
         permission_classes=[IsAuthenticated],
     )
     def select_menu(self, request):
-        selected_menu = max(self.get_queryset(), key=lambda menu: menu.votes_count)
+        selected_menu = max(self.get_queryset(),
+                            key=lambda menu: menu.votes_count)
         serializer = self.get_serializer(selected_menu)
 
         try:
